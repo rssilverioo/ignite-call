@@ -15,6 +15,7 @@ export const UserHeader = styled('div', {
     lineHeight: '$base',
     marginTop: '$2',
   },
+
   [`> ${Text}`]: {
     color: '$gray200',
   },

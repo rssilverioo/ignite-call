@@ -3,14 +3,14 @@ import { styled, Heading, Text } from '@ignite-ui/react'
 export const Container = styled('div', {
   maxWidth: 'calc(100vw - (100vw - 1160px) / 2)',
   marginLeft: 'auto',
-  display: 'flex',
   height: '100vh',
+  display: 'flex',
   alignItems: 'center',
   gap: '$20',
 })
 
 export const Hero = styled('div', {
-  maxWidth: '480px',
+  maxWidth: 480,
   padding: '0 $10',
 
   [`> ${Heading}`]: {
@@ -18,8 +18,9 @@ export const Hero = styled('div', {
       fontSize: '$6xl',
     },
   },
+
   [`> ${Text}`]: {
-    marginTop: '$2',
+    maskType: '$2',
     color: '$gray200',
   },
 })

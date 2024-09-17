@@ -1,10 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getServerSession } from 'next-auth'
-import { buildNextAuthOptions } from '../auth/[...nextauth].api'
+import { unstable_getServerSession } from 'next-auth'
 import { z } from 'zod'
-import { prisma } from '@/src/lib/prisma'
+import { prisma } from '../../../lib/prisma'
+import { buildNextAuthOptions } from '../auth/[...nextAuth].api'
 
-const timeIntervalBodySchema = z.object({
+const timeIntervalsBodySchema = z.object({
   intervals: z.array(
     z.object({
       weekDay: z.number(),
@@ -22,7 +22,7 @@ export default async function handler(
     return res.status(405).end()
   }
 
-  const session = await getServerSession(
+  const session = await unstable_getServerSession(
     req,
     res,
     buildNextAuthOptions(req, res),
@@ -32,15 +32,15 @@ export default async function handler(
     return res.status(401).end()
   }
 
-  const { intervals } = timeIntervalBodySchema.parse(req.body)
+  const { intervals } = timeIntervalsBodySchema.parse(req.body)
 
   await Promise.all(
-    intervals.map((intervals) => {
+    intervals.map((interval) => {
       return prisma.userTimeInterval.create({
         data: {
-          week_day: intervals.weekDay,
-          time_start_in_minutes: intervals.startTimeInMinutes,
-          time_end_in_minutes: intervals.endTimeInMinutes,
+          week_day: interval.weekDay,
+          time_start_in_minutes: interval.startTimeInMinutes,
+          time_end_in_minutes: interval.endTimeInMinutes,
           user_id: session.user?.id,
         },
       })

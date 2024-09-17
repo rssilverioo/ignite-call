@@ -1,8 +1,9 @@
 import { Avatar, Heading, Text } from '@ignite-ui/react'
-import { Container, UserHeader } from './styles'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import { prisma } from '@/src/lib/prisma'
+import { NextSeo } from 'next-seo'
+import { prisma } from '../../../lib/prisma'
 import { ScheduleForm } from './ScheduleForm'
+import { Container, UserHeader } from './styles'
 
 interface ScheduleProps {
   user: {
@@ -14,22 +15,26 @@ interface ScheduleProps {
 
 export default function Schedule({ user }: ScheduleProps) {
   return (
-    <Container>
-      <UserHeader>
-        <Avatar src={user?.avatarUrl} />
-        <Heading>{user?.name}</Heading>
-        <Text>{user?.bio}</Text>
-      </UserHeader>
+    <>
+      <NextSeo title={`Agendar com ${user.name} | Ignite Call`} />
 
-      <ScheduleForm />
-    </Container>
+      <Container>
+        <UserHeader>
+          <Avatar src={user.avatarUrl} />
+          <Heading>{user.name}</Heading>
+          <Text>{user.bio}</Text>
+        </UserHeader>
+
+        <ScheduleForm />
+      </Container>
+    </>
   )
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: [],
-    fallback: 'blocking', // Se não encontrar a rota, retorna um fallback bloqueante
+    fallback: 'blocking',
   }
 }
 
@@ -47,6 +52,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       notFound: true,
     }
   }
+
   return {
     props: {
       user: {
@@ -55,6 +61,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         avatarUrl: user.avatar_url,
       },
     },
-    revalidate: 60 * 60 * 24, // 1 dia
+    revalidate: 60 * 60 * 24, // 1 day
   }
 }
