@@ -23,7 +23,6 @@ export function ConfirmStep() {
   })
   function handelConfirmScheduling(data: ConfirmFormData) {
     console.log(data)
-    console.log(errors, 'aqui o errro')
   }
   return (
     <ConfirmForm as="form" onSubmit={handleSubmit(handelConfirmScheduling)}>
