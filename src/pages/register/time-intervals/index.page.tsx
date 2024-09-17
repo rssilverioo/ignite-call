@@ -104,6 +104,7 @@ export default function TimeIntervals() {
     await router.push('/register/update-profile')
   }
   return (
+    // @ts-ignore
     <Container>
       <Header>
         <Heading as="strong">Quase lá</Heading>
@@ -127,7 +128,7 @@ export default function TimeIntervals() {
                       return (
                         <Checkbox
                           onCheckedChange={(checked) => {
-                            field.onChange(checked === true)
+                            return field.onChange(checked === true)
                           }}
                           checked={field.value}
                         />

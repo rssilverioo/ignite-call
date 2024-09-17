@@ -32,6 +32,7 @@ export function ClaimUsernameForm() {
     await router.push(`/register?username=${username}`)
   }
   return (
+    // @ts-ignore
     <>
       <Form as="form" onSubmit={handleSubmit(handleClaimUsername)}>
         <TextInput
