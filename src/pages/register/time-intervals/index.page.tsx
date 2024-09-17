@@ -1,11 +1,4 @@
-import {
-  Button,
-  Checkbox,
-  Heading,
-  MultiStep,
-  Text,
-  TextInput,
-} from '@ignite-ui/react'
+import { Button, Checkbox, Heading, MultiStep, Text } from '@ignite-ui/react'
 import { Container, FormError, Header } from '../styles'
 import {
   IntervalBox,
@@ -22,6 +15,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { convertTimeStringToMinutes } from '@/src/utils/convert-time-string-to-minutes'
 import { api } from '@/src/lib/axios'
 import { useRouter } from 'next/router'
+import TextInput from '@/src/components/TextInput'
 
 const timeIntervalsFormSchema = z.object({
   intervals: z
@@ -127,9 +121,9 @@ export default function TimeIntervals() {
                     render={({ field }) => {
                       return (
                         <Checkbox
-                          onCheckedChange={(checked) => {
-                            return field.onChange(checked === true)
-                          }}
+                          onCheckedChange={(checked) =>
+                            field.onChange(checked === true)
+                          }
                           checked={field.value}
                         />
                       )
