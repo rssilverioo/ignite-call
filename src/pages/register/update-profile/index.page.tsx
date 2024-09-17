@@ -1,4 +1,3 @@
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Avatar,
   Button,
@@ -16,9 +15,10 @@ import { ArrowRight } from "phosphor-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { api } from "../../../lib/axios";
-import { buildNextAuthOptions } from "../../api/auth/[...nextAuth].api";
 import { Container, Header } from "../styles";
 import { FormAnnotation, ProfileBox } from "./styles";
+import { buildNextAuthOptions } from "../../api/auth/[...nextauth].api";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const updateProfileSchema = z.object({
   bio: z.string(),
