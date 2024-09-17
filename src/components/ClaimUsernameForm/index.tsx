@@ -36,7 +36,11 @@ export function ClaimUsernameForm() {
     // @ts-ignore
     <>
       <Form as="form" onSubmit={handleSubmit(handleClaimUsername)}>
-        <TextInput prefix="ignite.com/" placeholder="seu-usuario" />
+        <TextInput
+          prefix="ignite.com/"
+          placeholder="seu-usuario"
+          {...register('username')}
+        />
         <Button size="sm" type="submit" disabled={isSubmitting}>
           Reservar
           <ArrowRight />
